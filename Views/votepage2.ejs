@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>投票頁</title>
+	<link rel="stylesheet" href="all1.css">	
+	<link rel="Shortcut Icon" type="image/x-icon" href="icon.png" />
+	<script src="https://d3js.org/d3.v4.0.0-alpha.4.min.js"></script>
+
+</head>
+<body>
+	<div class="header">
+		<% if(userid > 0) { %>
+			<a href="http://127.0.0.1:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
+			<div id="right_login_btn"><a href="http://127.0.0.1:3005/user_edit" id="username"><%= user[0].u_account %></a><a href="http://127.0.0.1:3005/logout" id="log_state">登出</a></div>
+		<% }else{ %>
+			<a href="http://127.0.0.1:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
+			<div id="right_login_btn"><a href="http://127.0.0.1:3005/login" id="log_state">登錄</a></div>
+		<% } %>
+	</div>
+	<div class="clear"></div>
+	<div class="wrapper">
+		<div class="vote_topic">
+			<h2><%= file[0].name %></h2>
+		</div>
+		<div class="vote_content">
+			<div class="left_content">
+				<div class="vote_choice">
+				<form action="http://127.0.0.1:3005/sendvote" method='post'>
+					<input type="hidden" name="v_code" value=<%= file[0].v_no%> >
+					<h3>投票選項</h3>
+						<ul>
+							<%
+								var k;
+								var a=new Array(5);
+								a[0]=file[0].Option1;
+								a[1]=file[0].Option2;
+								a[2]=file[0].Option3;
+								a[3]=file[0].Option4;
+								a[4]=file[0].Option5;
+							 	for(var i=0;i<5;i++){
+									if(a[i]=="undefined"){
+										break;
+								}
+								k="r"+(i+1);
+							%>
+								<li>
+									<div class="opt">
+										<input class="magic-radio" type="radio" name="radio" id=<%= k %> value=<%= (i+1) %>>
+										<label for=<%= k %>><div class="choice_content"><div class="choice_color<%= (i+1) %>"style="width:<%= (vote_option[i]/(totalvote/100)) %>%"><%= a[i] %></div></div><div style="text-align: center;"><%= vote_option[i] %> 票</div></label>
+										
+									</div>
+								</li>
+							<% }; %>
+						</ul>
+				</div>
+					<div class="vote_date"><p>截止時間： <%= end %></p></div>	
+					<input type="submit" class="send_choice" value="送出">
+				</form>
+				<div class="clear"></div>
+			</div>
+			<div class="vote_result">
+				<h3>戰況分析</h3>
+				<canvas width="400" height="250"></canvas>
+				
+			</div>
+			<div class="clear"></div>
+				
+			<div class="vote_comment">
+				<h3>其他人的留言</h3>
+				<ul>
+					<li><div class="comments"><p>目前沒有人留言</p></div></li>
+				</ul>
+			</div>
+			<div class="vote_leavemessage">
+				<h3>我要留言</h3><br>
+				<form action="http://127.0.0.1:3005/comment"  method='post'>
+					<input type="hidden" name="v_code" value=<%= file[0].v_no%> >
+					<input type="text" name="message" placeholder="我有話要說...">
+					<input type="submit" class="send_message" value="送出">
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="footer">		
+		<p>Copyright © 2017 NUKIM. All rights reserved.</p>		
+	</div>	
+</body>
+<script>
+
+		var data = [<%= vote_option[0] %>, <%= vote_option[1] %>, <%= vote_option[2] %>, <%= vote_option[3] %>, <%= vote_option[4] %>, <%= vote_option[5] %>, <%= vote_option[6] %>, <%= vote_option[7] %>, <%= vote_option[8] %>, <%= vote_option[9] %>, <%= vote_option[10] %>];
+
+	
+		var canvas = document.querySelector("canvas"),context = canvas.getContext("2d");
+	
+		var width = canvas.width,height = canvas.height,radius = Math.min(width, height) / 2;
+	
+		var colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd","#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"];
+	
+		var arc = d3.arc().outerRadius(radius - 10).innerRadius(0).padAngle(0.03).context(context);
+	
+		var pie = d3.pie();
+	
+		var arcs = pie(data);
+	
+		context.translate(width / 2, height / 2);
+	
+		context.globalAlpha = 0.7;
+		arcs.forEach(function(d, i) {
+			context.beginPath();
+			arc(d);
+			context.fillStyle = colors[i];
+			context.fill();
+		});
+	
+		context.globalAlpha = 1;
+		context.beginPath();
+		arcs.forEach(arc);
+		
+	
+	</script>
+</html>

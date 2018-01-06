@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>八角投票網</title>
+	<link rel="stylesheet" type="text/css" href="all.css">
+	<link rel="stylesheet" href="magnific-popup.css">
+	<link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
+	<link rel="Shortcut Icon" type="image/x-icon" href="img/icon.png" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="wrap-login">
+		<div class="cover" style="display: none;">
+			<img src="img/l.svg" alt="">
+		</div>
+		<div class="header-login">
+			<div id="title" class="animated flipInX">
+				<h1>八角投票網</h1>
+			</div>
+		</div>
+		<div class="content-login">
+			<div id="sign-in-btn" class="animated bounceInLeft">
+				<a class="signIn-popup-modal" href="#signIn-modal"><i class="fas fa-sign-in-alt"></i>&nbsp; 登入</a>
+			</div>
+			<div id="sign-up-btn" class="animated bounceInRight">
+				<a class="signUp-popup-modal" href="#signUp-modal"><i class="fas fa-user-plus"></i>&nbsp; 註冊</a>
+			</div>		
+		</div>
+		<div class="clear"></div>
+		<div class="footer-login">
+			<div id="copyright" class="animated fadeInUp">
+				<p>Copyright © 2017 NUKIM. All rights reserved.</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- 自建 modal_登入 -->
+	<div id="signIn-modal" class="mfp-hide white-popup-block">
+		<h2>登入</h2>
+		<form action="">
+			<p class="signIn-data"><input type="text" placeholder="帳號"></p>
+			<p class="signIn-data"><input type="password" placeholder="密碼"></p>
+			<p class="signIn-data"><input type="submit" value="登入"></p>
+<!--
+			<div class="horizontal-line"></div>
+			<h6>或</h6>
+			<div class="horizontal-line"></div>
+			<div class="clear"></div>
+-->			
+		</form>
+		
+	</div>
+
+	<!-- 自建 modal_註冊 -->
+	<div id="signUp-modal" class="mfp-hide white-popup-block">
+		<h2>註冊</h2>
+		<form action="">
+			<p class="signIn-data"><input type="email" placeholder="電子郵件"></p>
+			<p class="signIn-data"><input type="text" placeholder="帳號"></p>
+			<p class="signIn-data"><input type="password" placeholder="密碼"></p>
+			<p class="signIn-data"><input type="number" min="1" max="150" placeholder="年齡"></p>
+			<p class="signIn-data"><select name="gender" id="">
+				<option value="male">男</option>
+				<option value="female">女</option>
+				<option value="other">其它</option>
+			</select></p>
+			<p class="signIn-data"><input type="submit" value="註冊"></p>
+		</form>
+				
+	</div>
+
+	<script src="jquery.magnific-popup.js"></script>
+	<script type="text/javascript" src="style.js"></script>
+</body>
+</html>

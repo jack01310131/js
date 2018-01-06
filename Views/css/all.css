@@ -1,0 +1,548 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*css reset*/
+
+body {
+    font-family: "Microsoft JhengHei";
+    color: #292929;
+}
+
+img{
+	max-width: 100%;
+}
+.clear{
+	clear: both;
+}
+
+.wrap-login{
+	background-image: url("../img/bg.jpg"); 
+	width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: 100% 80%;
+}
+
+.cover{
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background: #141414;
+}
+
+.cover img{
+	margin: 0 auto;
+    display: block;
+}
+
+#title{
+	padding-top: 50px;
+    padding-bottom: 30px;
+    text-align: center;
+    animation-duration: 2s;
+}	
+
+#title h1{
+	font-size: 450%;
+    color: #141414c7;
+    letter-spacing: 10px;
+    display: inline;
+}
+
+.footer{
+	width: 100%;
+	padding: 1.5% 0;
+	margin-top: 5%;
+	background: #292929;
+	font-size: 120%;
+	text-align: center;
+	color: #b4b4b4;
+}
+
+.footer-login{
+	width: 100%;
+}
+
+#copyright{
+	width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: #141414d4;
+    animation-duration: 2s;
+    padding: 2.5% 0;
+}
+
+#copyright p{
+	font-size: 120%;
+	text-align: center;
+	color: #b4b4b4;
+}
+
+.content-login{
+	width: 100%;
+	margin-top: 120px;
+	margin-left: 25%;
+}
+
+#sign-in-btn{
+	display: block;
+	animation-delay: 0.25s;
+    animation-duration: 1.5s;
+    transition: background 0.5s;
+}
+
+#sign-in-btn a{
+	width: 25%;
+	line-height: 100px;
+	letter-spacing: 5px;
+	font-family: Microsoft JhengHei;
+	font-size: 200%;
+	font-weight: 600;
+	text-align: center;
+	background: #fafafae8;
+	color: #292929;
+	text-decoration: none;
+	display: block;
+	float: left;
+	outline: none;
+}
+
+#sign-in-btn:hover a{
+	color: #fafafae8;
+	background: #292929;
+	border: none;
+	transition: 0.4s;
+	opacity: 0.8;
+}
+
+#sign-up-btn{
+	display: block;
+	animation-delay: 0.25s;
+    animation-duration: 1.5s;
+    transition: background 0.5s;
+}
+
+#sign-up-btn a{
+	width: 25%;
+	line-height: 100px;
+	letter-spacing: 5px;
+	font-family: Microsoft JhengHei;
+	font-size: 200%;
+	font-weight: 600;
+	text-align: center;
+	background: #fafafae8;
+	color: #292929;
+	text-decoration: none;
+	display: block;
+	float: left;
+	outline: none;
+}
+
+#sign-up-btn:hover a{
+	color: #fafafae8;
+	background: #292929;
+	transition: 0.4s;
+	opacity: 0.8;
+}
+
+.header{
+	width: 100%;
+    height: 100px;
+	box-shadow: 0 1px 3px #ddd;
+    background: #fff;
+    border-radius: 0;
+    position: fixed;
+  	top: 0;
+  	right: 0;
+  	z-index: 9999;
+}
+
+.header a{
+    margin-left: 7%;
+    margin-top: 5px;
+    padding: 0 1%;
+	float: left;
+	text-decoration:none;
+
+}
+
+#right_login_btn{
+	position: relative;
+	/*right: 10px;*/
+	left: 715px;
+	font-size: 150%;
+	color: #0c9;
+	top:35px;
+}
+
+#username,#log_state{
+	font-size: 20px;	
+	margin-left: 5px;
+	float: left;
+	color: #0c9
+}
+
+.header img{
+	max-width: 100%;
+	height: 95px;
+}
+
+.wrap{
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 120px;
+}
+
+.vote-content{
+	width: 75%;
+	float: left;
+
+}
+
+.vote-data{
+	text-align: center;
+	font-family: Microsoft JhengHei;
+	width: 30%;
+	height: auto;
+	border: 1px solid #00cc99;
+	background: #fff;
+	margin: 1%;
+	float: left;
+}
+
+.vote-data a{
+	text-decoration: none;
+}
+
+.vote-data:hover a{
+	text-decoration: none;
+}
+
+.vote-data h2{
+	font-size: 150%;
+	padding: 5%;
+	background: #0c9;
+	color: #FFF;
+	font-weight: 600;
+}
+
+.vote-data p{
+	font-size: 100%;
+	padding: 5%;
+	color: #292929;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.my-vote{
+	width: 15%;
+	margin-top: 1%;
+	float: left;
+}
+
+.build-vote-btn{
+	display: block;
+	animation-delay: 0.25s;
+    animation-duration: 1.5s;
+    transition: background 0.5s;
+}
+
+.build-vote-btn a{
+	width: 80%;
+	padding: 10%;	
+	font-family: Microsoft JhengHei;
+	font-size: 200%;
+	font-weight: 600;
+	text-align: center;
+	border: 3px solid #0c9;
+	border-radius: 6px;
+	color: #292929;
+	text-decoration: none;
+	display: block;
+}
+
+.build-vote-btn a:hover{
+	color: #fff;
+	background: #0c9;
+	transition: 0.4s;
+	opacity: 0.8;
+}
+
+.build-vote button{	
+	display: block;
+	animation-delay: 0.25s;
+    animation-duration: 1.5s;
+    transition: background 0.5s;
+	font-family: Microsoft Jhenghei;
+	font-size: 150%;
+	text-decoration: none;
+	color: #292929;
+	margin-bottom: 1%;
+	background: #FFF;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.build-vote button:hover{
+	font-family: Microsoft Jhenghei;
+	font-size: 150%;
+	text-decoration: underline;
+	color: #0c9;
+	transition: 0.4s;
+}
+
+.vote-record{
+	text-align: center;
+	margin-top: 20px;
+	border: 3px solid #0c9;
+	border-radius: 6px;
+	padding: 10%;
+	width: 80%;
+}
+
+.vote-record h4{
+	font-size: 150%;
+	margin-bottom: 20px;
+}
+
+.vote-record p{
+	font-size: 100%;
+	margin-bottom: 10px;
+}
+
+.vote-record p a{
+	text-decoration: none;
+	color: #292929;
+}
+
+.vote-record p a:hover{
+	text-decoration: underline;
+	color: #0c9;
+}
+
+.build-vote{
+	text-align: left;
+}
+
+.build-vote h2{
+	font-family: Microsoft Jhenghei;
+	font-size: 150%;
+	margin-top: 1%;
+}
+
+.build-vote p{
+	padding: 2%;
+}
+
+.build-vote a{
+	font-family: Microsoft Jhenghei;
+	font-size: 150%;
+	text-decoration: none;
+	color: #292929;
+	margin-bottom: 1%;
+}
+
+.build-vote a:hover{
+	font-family: Microsoft Jhenghei;
+	font-size: 150%;
+	text-decoration: underline;
+	color: #0c9;
+	transition: 0.4s;
+}
+
+.build-vote input[type=text], [type=datetime-local], [type=number]{
+	width: 40%;
+	margin: 10px 0;
+	padding: 5px;
+	font-size: 150%;
+	font-family: Microsoft Jhenghei;
+  	@include transition(all 0.30s ease-in-out);
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+	color: #d6d6d6;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #d6d6d6;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #d6d6d6;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #d6d6d6;
+}
+/* 
+.build-vote input[type=text]:focus {
+	@include box-shadow(0 0 5px rgba(81, 203, 238, 1));
+	padding: 3px 0px 3px 3px;
+	margin: 5px 1px 3px 0px;
+	border: 3px solid #00cc99de;
+	border-radius: 2%;
+}
+*/
+.build-vote input[type=submit]{
+	width: 35%;
+	margin: 10px 0;
+	padding: 5px;
+	font-size: 150%;
+	font-family: Microsoft Jhenghei;
+	font-weight: 600;
+	@include transition(all 0.30s ease-in-out);
+	outline: none;
+	background: #fff;
+	color: #292929;
+	border: 1px solid #CCCCCC;
+	border-radius: 6px;
+}
+
+.build-vote input[type=submit]:hover{
+	width: 35%;
+	margin: 10px 0;
+	padding: 5px;
+	font-size: 150%;
+	font-family: Microsoft Jhenghei;
+	transition: 0.5s;
+	cursor: pointer;
+	outline: none;
+	background: #292929;
+	color: #fff;
+}
+
+.white-popup-block{
+    background: #fff;
+    padding: 20px 30px;
+    text-align: center;
+    max-width: 30%;
+    margin: 40px auto;
+    position: relative;
+    border-radius: 6px;
+    font-family: Microsoft JhengHei;
+}
+
+.white-popup-block h2{
+	color: #292929;
+	font-size: 300%;
+	padding: 2%;
+}
+
+.signIn-data{
+	color: #292929;
+	font-size: 150%;
+	padding: 2%;
+}
+
+.signIn-data input[type=text], .signIn-data input[type=password], .signIn-data input[type=email], .signIn-data input[type=number], .signIn-data select{
+	width: 80%;
+	margin: 10px 0;
+	padding: 5px;
+	font-size: 100%;
+	font-family: Microsoft Jhenghei;
+  	@include transition(all 0.30s ease-in-out);
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #CCCCCC;
+}
+/* 
+.signIn-data input[type=text]:focus {
+	@include box-shadow(0 0 5px rgba(81, 203, 238, 1));
+	padding: 3px 0px 3px 3px;
+	margin: 5px 1px 3px 0px;
+	border: 3px solid #00cc99de;
+	border-radius: 2%;
+}
+*/
+.signIn-data input[type=submit]{
+	width: 35%;
+	margin: 10px 0;
+	padding: 5px;
+	font-size: 100%;
+	font-family: Microsoft Jhenghei;
+	font-weight: 600;
+	@include transition(all 0.30s ease-in-out);
+	outline: none;
+	background: #fff;
+	color: #292929;
+	border: 1px solid #CCCCCC;
+	border-radius: 6px;
+}
+
+.signIn-data input[type=submit]:hover{
+	width: 35%;
+	margin: 10px 0;
+	padding: 5px;
+	font-size: 100%;
+	font-family: Microsoft Jhenghei;
+	transition: 0.5s;
+	cursor: pointer;
+	outline: none;
+	background: #292929;
+	color: #fff;
+}
+
+.horizontal-line{
+	width: 35%;
+	margin: 10px 0;
+	padding: 5px;
+	border-bottom: 1px solid #CCCCCC;
+	float: left;
+}
+
+.signIn-data h6{
+	width: 5%;
+	color: #292929;
+	font-size: 80%;
+	float: left;
+}
