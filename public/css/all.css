@@ -51,6 +51,9 @@ table {
 body {
     font-family: "Microsoft JhengHei";
     color: #292929;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 img{
@@ -107,6 +110,7 @@ img{
 	font-size: 120%;
 	text-align: center;
 	color: #b4b4b4;
+	align-self: flex-end;
 }
 
 .footer-login{
@@ -219,7 +223,7 @@ img{
 #right_login_btn{
 	position: relative;
 	/*right: 10px;*/
-	left: 715px;
+	left: 50%;
 	font-size: 150%;
 	color: #0c9;
 	top:35px;
@@ -241,6 +245,7 @@ img{
 	width: 80%;
 	margin: 0 auto;
 	margin-top: 120px;
+	flex: 1 0 auto;
 }
 
 .vote-content{
@@ -271,9 +276,12 @@ img{
 .vote-data h2{
 	font-size: 150%;
 	padding: 5%;
+	text-overflow:ellipsis;
 	background: #0c9;
 	color: #FFF;
 	font-weight: 600;
+	overflow: hidden;
+	white-space:nowrap;
 }
 
 .vote-data p{
@@ -294,6 +302,7 @@ img{
 	animation-delay: 0.25s;
     animation-duration: 1.5s;
     transition: background 0.5s;
+    margin-bottom: 5%;
 }
 
 .build-vote-btn a{

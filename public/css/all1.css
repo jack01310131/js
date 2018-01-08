@@ -43,7 +43,11 @@ table {
 }
 
 body{
-  font-family: '微軟正黑體';
+  font-family: "Microsoft JhengHei";
+  color: #292929;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 .user_edit{
@@ -172,7 +176,7 @@ body{
   margin-left: 10;
 }
 
-/*.vote_choice input[type=radio]{
+/*.vote_choice input[type=magic]{
   width: 50px;
 }
 */
@@ -183,22 +187,22 @@ body{
   to {
     border-color: #3e97eb; } }
 
-.magic-radio{
+.magic-checkbox{
   position: absolute;
   display: none; 
 }
 
-.magic-radio + label{
+.magic-checkbox + label{
   position: relative;
   display: block;
   padding-left: 30px;
   cursor: pointer;
   vertical-align: middle; }
-.magic-radio + label:hover:before{
+.magic-checkbox + label:hover:before{
     animation-duration: 0.4s;
     animation-fill-mode: both;
     animation-name: hover-color; }
-  .magic-radio + label:before{
+  .magic-checkbox + label:before{
     position: absolute;
     top: 0;
     left: 0;
@@ -207,21 +211,21 @@ body{
     height: 20px;
     content: '';
     border: 1px solid #c0c0c0; }
-  .magic-radio + label:after{
+  .magic-checkbox + label:after{
     position: absolute;
     display: none;
     content: ''; }`
 
-.magic-radio:checked + label:before{
+.magic-checkbox:checked + label:before{
   animation-name: none; }
 
-.magic-radio:checked + label:after{
+.magic-checkbox:checked + label:after{
   display: block; }
 
-.magic-radio + label:before {
+.magic-checkbox + label:before {
   border-radius: 50%; }
 
-.magic-radio + label:after {
+.magic-checkbox + label:after {
   top: 7px;
   left: 7px;
   width: 8px;
@@ -229,13 +233,13 @@ body{
   border-radius: 50%;
   background: #3e97eb; }
 
-.magic-radio:checked + label:before {
+.magic-checkbox:checked + label:before {
   border: 1px solid #3e97eb; }
 
-.magic-radio:checked[disabled] + label:before {
+.magic-checkbox:checked[disabled] + label:before {
   border: 1px solid #c9e2f9; }
 
-.magic-radio:checked[disabled] + label:after {
+.magic-checkbox:checked[disabled] + label:after {
   background: #c9e2f9; }
 
 .opt{
@@ -361,6 +365,7 @@ body{
   background-color: #d9d9d9;
   margin-top: 30px;
   padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .vote_comment h3{
@@ -624,6 +629,7 @@ a{
   font-size: 120%;
   text-align: center;
   color: #b4b4b4;
+  align-self: flex-end;
 }
 
 .footer-login{
@@ -634,7 +640,7 @@ a{
 #right_login_btn{
   position: relative;
   /*right: 10px;*/
-  left: 715px;
+  left: 50%;
   font-size: 150%;
   color: #0c9;
   top:35px;

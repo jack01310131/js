@@ -3,35 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>投票頁</title>
-	<link rel="stylesheet" href="/all1.css">	
+	<link rel="stylesheet" href="all1.css">	
 	<link rel="Shortcut Icon" type="image/x-icon" href="icon.png" />
 	<script src="https://d3js.org/d3.v4.0.0-alpha.4.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-	<script type="text/javascript">
-		// $(".magic_checkbox").click(function() {
-		//   	  $(".magic_checkbox").not(this).removeAttr("checked");
-		// });
-	
-		// $(".magic_checkbox").click(function(){
-		// 	var bol = $(".magic_checkbox:checked").length >=1;     
-		// 	$(".magic_checkbox").not(":checked").attr("disabled",bol);
-		// });
-
-		$(document).ready(function() {
-			$('input[type=checkbox]').click(function() {
-				$("input[name='radio[]']").attr('disabled', true);
-				if ($("input[name='radio[]']:checked").length >= <%= file[0].votelimit %> ) {
-					$("input[name='radio[]']:checked").attr('disabled', false);
-				} else {
-					$("input[name='radio[]']").attr('disabled', false);
-				}
-			});
-		})
-
-	</script>
-
-
 </head>
 <body>
 	<div class="header">
@@ -51,8 +25,6 @@
 		<div class="vote_content">
 			<div class="left_content">
 				<div class="vote_choice">
-				<form action="http://127.0.0.1:3005/sendvote" method='post'>
-					<input type="hidden" name="v_code" value=<%= file[0].v_no%> >
 					<h3>投票選項</h3>
 						<ul>
 							<%
@@ -71,17 +43,13 @@
 							%>
 								<li>
 									<div class="opt">
-										<input class="magic-checkbox" type="checkbox" name="radio[]" id=<%= k %> value=<%= (i+1) %>>
 										<label for=<%= k %>><div class="choice_content"><div class="choice_color<%= (i+1) %>"style="width:<%= (vote_option[i]/(totalvote/100)) %>%"><%= a[i] %></div></div><div style="text-align: center;"><%= vote_option[i] %> 票</div></label>
-										
 									</div>
 								</li>
 							<% }; %>
 						</ul>
 				</div>
-					<div class="vote_date"><p>截止時間： <%= end %></p></div>	
-					<input type="submit" class="send_choice" value="送出">
-				</form>
+					<div class="vote_date"><p>截止時間： 已截止</p></div>	
 				<div class="clear"></div>
 			</div>
 			<div class="vote_result">

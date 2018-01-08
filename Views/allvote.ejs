@@ -23,7 +23,7 @@
 	</div>
 	<div class="clear"></div>
 	<div class="wrap">
-		<div class="vote-content">
+		<div class="allvote-vote-content">
 			<% for(var i=0;i<file.length;i++){ 
 				var k=0;
 				for(var j=0;j<T_message.length;j++){ 
@@ -33,7 +33,7 @@
 				}
 			%>
 			
-			<div class="vote-data"><a href="http://127.0.0.1:3005/votepage?no=<%= file[i].v_no %>">
+			<div class="vote-data"><a href="http://127.0.0.1:3005/history?no=<%= file[i].v_no %>">
 				<h2><%= file[i].name %></h2>
 				<p>總投票數：<%= file[i].totalvote %> 票</p>
 				<p><%= k %> 則評論</p>
@@ -43,20 +43,7 @@
 					
 			<div class="clear"></div>
 		</div>	
-		<div class="my-vote">
-			<div class="build-vote-btn">
-				<a href="http://127.0.0.1:3005/build">建立投票</a>
-			</div>
-			<div class="build-vote-btn">
-				<a href="http://127.0.0.1:3005/allvote">歷史投票</a>
-			</div>
-			<div class="vote-record">
-				<h4>投票紀錄</h4>
-				<% for(var x=0;x<history.length;x++){ %>
-					<p><a href="http://127.0.0.1:3005/votepage?no=<%= history[x].v_no %>"><%= history[x].name %></a></p>
-				<% } %>
-			</div>
-		</div>
+
 		<div class="clear"></div>
 	</div>
 	<div class="footer">		
@@ -64,7 +51,7 @@
 	</div>
 	
 	<!-- 引入外部 JS -->
-	<script src="js/jquery.magnific-popup.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script type="text/javascript" src="js/style.js"></script>
 </body>
 </html>

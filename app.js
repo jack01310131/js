@@ -34,12 +34,7 @@ app.use(session({
 app.engine('ejs', engine);
 app.set('views', path.join(__dirname, 'Views'));
 app.set('view engine', 'ejs');
-// var con = mysql.createConnection({
-//     host: "140.127.218.203",
-//     user: "root",
-//     password: "presonafrenim108",
-//     database: "jsproject"
-//   });
+
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -117,6 +112,64 @@ app.get('/homepage', function (req, res) {      //首頁
     });
 
  })
+
+
+ app.get('/allvote', function (req, res) {      //所有投票葉
+    var user=new Array();
+    if(req.session.userid){
+        var session_userid=req.session.userid
+    }else{
+        var session_userid=0
+    }
+    var select4=' SELECT u_account FROM user WHERE u_id = "'+req.session.userid+'"'
+    con.query(select4,function(error, result, fields){
+        if(error){
+            console.log('資料讀取失敗！');
+            throw error;
+        }
+        user = result
+    });
+
+    var history=new Array();
+    var select3=' SELECT v_no,name FROM vote WHERE v_no="'+req.cookies.history1+'" OR v_no="'+req.cookies.history2+'" OR v_no="'+req.cookies.history3+'" OR v_no="'+req.cookies.history4+'" OR v_no="'+req.cookies.history5+'" OR v_no="'+req.cookies.history6+'" OR v_no="'+req.cookies.history7+'" OR v_no="'+req.cookies.history8+'" OR v_no="'+req.cookies.history9+'" OR v_no="'+req.cookies.history10+'" '
+    con.query(select3,function(error, result, fields){
+        if(error){
+            console.log('資料讀取失敗！');
+            throw error;
+        }
+        history = result
+    });
+
+    var nowtime = dateFormat(now, "yyyy-mm-dd hh:MM:ss");
+    // var select = 'select * from vote where endtime>"'+nowtime+'" '
+    var T_message=new Array();
+    var select = ' select v_no,name,endtime,SUM(vote_option1+vote_option2+vote_option3+vote_option4+vote_option5+vote_option6+vote_option7+vote_option8+vote_option9+vote_option10) as totalvote from vote,voting_results where vote.v_no=voting_results.v_id GROUP BY v_no '
+    var select2 = ' SELECT v_id,COUNT(no) as total FROM message GROUP BY v_id '
+    con.query(select2,function(error, result, fields){
+        if(error){
+            console.log('資料讀取失敗！');
+            throw error;
+        }
+        T_message=result
+    });
+    
+    
+    con.query(select,function(error, result, fields){
+        if(error){
+            console.log('資料讀取失敗！');
+            throw error;
+        }
+        console.log(result);
+        console.log(nowtime);
+        console.log(T_message)
+        console.log(history)
+        console.log(session_userid)
+        console.log(user)
+        res.render('allvote',{file: result,T_message: T_message,history: history,userid: session_userid,user: user})    
+    });
+
+ })
+
 
 app.get('/user_edit', function (req, res) {     //資料更新
     if(req.session.userid) {
@@ -231,10 +284,90 @@ app.get('/user_edit', function (req, res) {     //資料更新
     });
     
  })
+
+ app.get('/history', function (req, res) {     //歷史頁
+    var user=new Array();
+    if(req.session.userid){
+        var session_userid=req.session.userid
+    }else{
+        var session_userid=0
+    }
+    var select4=' SELECT u_account FROM user WHERE u_id = "'+req.session.userid+'"'
+    con.query(select4,function(error, result, fields){
+        if(error){
+            console.log('資料讀取失敗！');
+            throw error;
+        }
+        user = result
+    });
+    
+    var no=req.query.no
+    var select='select * from user,vote,message where v_no="'+no+'" and vote.v_no=message.v_id and message.u_id=user.u_id '
+    var select2='select * from vote where v_no="'+no+'" '
+
+    var select3='select SUM(vote_option1+vote_option2+vote_option3+vote_option4+vote_option5+vote_option6+vote_option7+vote_option8+vote_option9+vote_option10) as totalvote, sum(vote_option1) as SUMoption1, sum(vote_option2) as SUMoption2, sum(vote_option3) as SUMoption3, sum(vote_option4) as SUMoption4, sum(vote_option5) as SUMoption5, sum(vote_option6) as SUMoption6, sum(vote_option7) as SUMoption7, sum(vote_option8) as SUMoption8, sum(vote_option9) as SUMoption9, sum(vote_option10) as SUMoption10 from vote,voting_results where v_no="'+no+'" and voting_results.v_id=vote.v_no'
+    var vote_option=new Array(10);
+    var totalvote=0;
+
+    con.query(select3,function(error, result, fields){
+        if(error){
+            console.log('資料讀取失敗！');
+            throw error;
+        }
+        console.log(result);
+        vote_option[0] = result[0].SUMoption1
+        vote_option[1] = result[0].SUMoption2
+        vote_option[2] = result[0].SUMoption3
+        vote_option[3] = result[0].SUMoption4
+        vote_option[4] = result[0].SUMoption5
+        vote_option[5] = result[0].SUMoption6
+        vote_option[6] = result[0].SUMoption7
+        vote_option[7] = result[0].SUMoption8
+        vote_option[8] = result[0].SUMoption9
+        vote_option[9] = result[0].SUMoption10
+        totalvote=  result[0].totalvote
+        console.log(totalvote);
+
+       console.log((vote_option[0]/totalvote));
+    });
+    
+    
+    con.query(select,function(error, result, fields){
+        if(error){
+            console.log('資料讀取失敗！');
+            throw error;
+        }
+        console.log(result);
+        console.log(result.length);
+        
+        if(result.length>0){
+            console.log(result[0].endtime.toLocaleString())
+            res.render('votepage_history',{file: result, vote_option: vote_option, totalvote: totalvote, userid: session_userid, user: user, end: result[0].endtime.toLocaleString()})
+        }else{
+        }
+    });
+    con.query(select2,function(error, result, fields){
+        if(error){
+            console.log('資料讀取失敗！');
+            throw error;
+        }
+        console.log(result);
+        console.log(result.length);
+        if(result.length>0){
+            res.render('votepage2_history',{file: result, vote_option: vote_option , totalvote: totalvote, userid: session_userid, user: user, end: result[0].endtime.toLocaleString()})
+        }
+    });
+    
+ })
+
  app.post('/sendvote', function (req, res) {    //送出投票
     if(req.session.userid) {
         var v_code=req.body.v_code;
-        var whatoption=req.body.radio;
+        var whatoption=new Array(10);
+        for(var y=0;y<10;y++){
+            whatoption[y] = 0;
+        }
+        // var whatoption=req.body.radio;
         var history=new Array(10);
         history[0]=req.cookies.history1
         history[1]=req.cookies.history2
@@ -246,18 +379,25 @@ app.get('/user_edit', function (req, res) {     //資料更新
         history[7]=req.cookies.history8
         history[8]=req.cookies.history9
         history[9]=req.cookies.history10
+        console.log(req.body.radio)
+        for(var k=0;k<req.body.radio.length;k++){
+            var x = req.body.radio[k];
+            whatoption[(x-1)] =1;
+            console.log(whatoption[(x-1)]+" , "+x)
+        }
+
         for(var i=9;i>=0;i--){
-            console.log(req.cookies.history1)
             res.cookie('history'+(i+1),history[(i-1)])
             if(i==0){
                 res.cookie('history1',v_code)
             }
         }
-        var add='INSERT INTO voting_results (u_id,v_id,vote_option'+whatoption+') values ("'+req.session.userid+'","'+v_code+'","1" )'
+        // var add='INSERT INTO voting_results (u_id,v_id,vote_option'+whatoption+') values ("'+req.session.userid+'","'+v_code+'","1" )'
+        var add='INSERT INTO voting_results (u_id,v_id,vote_option1,vote_option2,vote_option3,vote_option4,vote_option5,vote_option6,vote_option7,vote_option8,vote_option9,vote_option10) values ("'+req.session.userid+'","'+v_code+'","'+whatoption[0]+'","'+whatoption[1]+'","'+whatoption[2]+'","'+whatoption[3]+'","'+whatoption[4]+'","'+whatoption[5]+'","'+whatoption[6]+'","'+whatoption[7]+'","'+whatoption[8]+'","'+whatoption[9]+'" )'
         con.query(add,function(error){
             if(error){
                 console.log('寫入資料失敗！');
-                throw error;
+                throw error;``
             } 
         });
         res.redirect('http://127.0.0.1:3005/votepage?no='+v_code)
@@ -294,6 +434,64 @@ app.get('/user_edit', function (req, res) {     //資料更新
     res.render('login')
 
  })
+
+ app.post('/signin', function (req, res) {  //本地
+    
+    var account=req.body.account;
+    var pwd=req.body.pwd;
+    var sql ='SELECT * FROM user WHERE u_account="'+account+'" and u_pwd="'+pwd+'"'
+    con.query(sql,function(error, result, fields){
+        if(error){
+            console.log('資料讀取失敗！');
+            throw error;
+        }
+        console.log(result);
+        
+        // res.render('votepage',{ name: result[0].name ,endtime:result[0].endtime ,Option1:result[0].Option1 ,Option2:result[0].Option2})
+        if(result[0].u_account==account && result[0].u_pwd==pwd){
+            
+            req.session.userid= result[0].u_id;
+
+            res.redirect('http://127.0.0.1:3005/homepage')
+        }
+        else{
+            res.send("帳密有錯")
+        }     
+    });
+ })
+
+ app.get('/signup', function (req, res) {   //註冊
+    
+     var account2 = req.query.account2;
+     var pwd2 = req.query.pwd2;
+     var email2 = req.query.email2;
+     var age2 = req.query.age2;
+     var gender2 = req.query.gender2;
+     var ff=new Array()
+     var sql = 'select * from user where u_account= "'+account2+'" OR  u_email="'+email2+'"'
+     con.query(sql,function(error, result, fields){
+        if(error){console.log('讀取失敗！');throw error;}
+        ff=result
+        console.log(ff.length+"ssads")
+        res.redirect('http://127.0.0.1:3005/aabbccdd/lmkmnkj/iujiu/ji?length='+ff.length)
+    })
+    console.log(ff.length)
+
+app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到資料庫
+    var length =req.query.length
+    if(length>0){
+        res.send('wrong')
+    }else{
+        var sql2 = 'insert INTO user (u_account,u_pwd,u_email,u_age,u_gender) values ("'+account2+'","'+pwd2+'","'+email2+'","'+age2+'","'+gender2+'" )'
+        con.query(sql2,function(error){if(error){console.log('寫入資料失敗！');throw error;}});
+        
+        // res.send("asas")
+        //req.session.userid= result[0].u_id;
+        res.redirect('http://127.0.0.1:3005/login')
+    }
+    });
+})
+
  app.get('/build', function (req, res) {    //建立投票
     if(req.session.userid) {
         var user=new Array();

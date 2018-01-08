@@ -219,7 +219,7 @@ img{
 #right_login_btn{
 	position: relative;
 	/*right: 10px;*/
-	left: 715px;
+	left: 50%;
 	font-size: 150%;
 	color: #0c9;
 	top:35px;
