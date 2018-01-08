@@ -38,7 +38,7 @@ app.set('view engine', 'ejs');
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "presonafrenim108",
     database: "jsproject"
   });
   con.connect(function(err) {
@@ -186,7 +186,7 @@ app.get('/user_edit', function (req, res) {     //資料更新
         console.log(req.session.userid)
 
     }else{
-        res.redirect('http://127.0.0.1:3005/login')
+        res.redirect('http://140.127.218.203:3005/login')
     }
 
 
@@ -208,7 +208,7 @@ app.get('/user_edit', function (req, res) {     //資料更新
     });
 
 
-    res.redirect('http://127.0.0.1:3005/user_edit')
+    res.redirect('http://140.127.218.203:3005/user_edit')
  })
  app.get('/votepage', function (req, res) {     //投票頁
     var user=new Array();
@@ -400,9 +400,9 @@ app.get('/user_edit', function (req, res) {     //資料更新
                 throw error;``
             } 
         });
-        res.redirect('http://127.0.0.1:3005/votepage?no='+v_code)
+        res.redirect('http://140.127.218.203:3005/votepage?no='+v_code)
     }else{
-        res.redirect('http://127.0.0.1:3005/login')
+        res.redirect('http://140.127.218.203:3005/login')
     }
  })
  app.post('/comment', function (req, res) {       //留言
@@ -420,9 +420,9 @@ app.get('/user_edit', function (req, res) {     //資料更新
             }
         });
 
-        res.redirect('http://127.0.0.1:3005/votepage?no='+v_code)
+        res.redirect('http://140.127.218.203:3005/votepage?no='+v_code)
     }else{
-        res.redirect('http://127.0.0.1:3005/login')
+        res.redirect('http://140.127.218.203:3005/login')
     }
    
 
@@ -452,7 +452,7 @@ app.get('/user_edit', function (req, res) {     //資料更新
             
             req.session.userid= result[0].u_id;
 
-            res.redirect('http://127.0.0.1:3005/homepage')
+            res.redirect('http://140.127.218.203:3005/homepage')
         }
         else{
             res.send("帳密有錯")
@@ -473,7 +473,7 @@ app.get('/user_edit', function (req, res) {     //資料更新
         if(error){console.log('讀取失敗！');throw error;}
         ff=result
         console.log(ff.length+"ssads")
-        res.redirect('http://127.0.0.1:3005/aabbccdd/lmkmnkj/iujiu/ji?length='+ff.length)
+        res.redirect('http://140.127.218.203:3005/aabbccdd/lmkmnkj/iujiu/ji?length='+ff.length)
     })
     console.log(ff.length)
 
@@ -487,7 +487,7 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
         
         // res.send("asas")
         //req.session.userid= result[0].u_id;
-        res.redirect('http://127.0.0.1:3005/login')
+        res.redirect('http://140.127.218.203:3005/login')
     }
     });
 })
@@ -505,7 +505,7 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
         });
         
     }else{
-        res.redirect('http://127.0.0.1:3005/login')
+        res.redirect('http://140.127.218.203:3005/login')
     }
  })
 
@@ -529,7 +529,7 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
     var add='INSERT INTO vote (name,endtime,votelimit,Option1,Option2,Option3,Option4,Option5,Option6,Option7,Option8,Option9,Option10) values ("'+name+'","'+endtime+'","'+votelimit+'","'+Option1+'","'+Option2+'","'+Option3+'","'+Option4+'","'+Option5+'","'+Option6+'","'+Option7+'","'+Option8+'","'+Option9+'","'+Option10+'" )'
     con.query(add,function(error){if(error){console.log('寫入資料失敗！');throw error;}});
 
-    res.redirect('http://127.0.0.1:3005/build/voting_results/new/input')
+    res.redirect('http://140.127.218.203:3005/build/voting_results/new/input')
    
  })
  app.get('/build/voting_results/new/input', function (req, res) {
@@ -548,7 +548,7 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
         var add = ' INSERT INTO voting_results(v_id,u_id) value ("'+newno+'","0") '
         con.query(add,function(error){if(error){console.log('寫入資料失敗！');throw error;}console.log(newno);});
     },500);
-    res.redirect('http://127.0.0.1:3005/homepage')
+    res.redirect('http://140.127.218.203:3005/homepage')
  })
 
 
@@ -588,7 +588,7 @@ app.get('/pie', function (req, res) {
  })
  app.get('/logout', function (req, res) {
     req.session = null
-    res.redirect('http://127.0.0.1:3005/login')
+    res.redirect('http://140.127.218.203:3005/login')
  })
 
  app.listen(3005)
