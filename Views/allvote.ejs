@@ -16,11 +16,11 @@
 	<!-- <% if(userid == "undefined") %> -->
 	<div class="header">
 		<% if(userid > 0) { %>
-			<a href="http://localhost:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
-			<div id="right_login_btn"><a href="http://localhost:3005/user_edit" id="username"><%= user[0].u_account %></a><a href="http://localhost:3005/logout" id="log_state">登出</a></div>
+			<a href="http://140.127.218.203:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
+			<div id="right_login_btn"><a href="http://140.127.218.203:3005/user_edit" id="username"><%= user[0].u_account %></a><a href="http://140.127.218.203:3005/logout" id="log_state">登出</a></div>
 		<% }else{ %>
-			<a href="http://localhost:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
-			<div id="right_login_btn"><a href="http://localhost:3005/login" id="log_state">登錄</a></div>
+			<a href="http://140.127.218.203:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
+			<div id="right_login_btn"><a href="http://140.127.218.203:3005/login" id="log_state">登錄</a></div>
 		<% } %>
 	</div>
 	<div class="clear"></div>
@@ -35,7 +35,7 @@
 				}
 			%>
 			
-			<div class="vote-data"><a href="http://localhost:3005/history?no=<%= file[i].v_no %>">
+			<div class="vote-data"><a href="http://140.127.218.203:3005/history?no=<%= file[i].v_no %>">
 				<h2><%= file[i].name %></h2>
 				<p>總投票數：<%= file[i].totalvote %> 票</p>
 				<p><%= k %> 則評論</p>

@@ -38,9 +38,9 @@ app.set('views', path.join(__dirname, 'Views'));
 app.set('view engine', 'ejs');
 
 var con = mysql.createConnection({
-    host: "127.0.0.1",
+    host: "localhost",
     user: "root",
-    password: "",
+    password: "presonafrenim108",
     database: "jsproject"
   });
   con.connect(function(err) {
@@ -64,7 +64,7 @@ FACEBOOK_APP_SECRET = 'a774fce4757012d71fbb1a7d789076e7'
 passport.use(new FacebookStrategy({
 clientID: FACEBOOK_APP_ID,
 clientSecret: FACEBOOK_APP_SECRET,
-callbackURL: "http://127.0.0.1:3005/auth/facebook/callback",
+callbackURL: "http://140.127.218.203:3005/auth/facebook/callback",
 profileFields:['id','emails','gender','birthday','age_range']
 },
 function(accessToken, refreshToken, profile, cb) {
@@ -105,7 +105,7 @@ var gg=new Array();
 con.query(sql,function(error, result, fields){
    if(error){console.log('讀取失敗！');throw error;}
    gg=result;
-   res.redirect('http://127.0.0.1:3005/fb/fbfb/fbfbfb/fbfbfbfb?gglength='+gg.length+'&id='+req.user.id+'&email='+req.user._json.email+'&gender='+req.user.gender+'&age='+req.user._json.age_range.min)
+   res.redirect('http://140.127.218.203:3005/fb/fbfb/fbfbfb/fbfbfbfb?gglength='+gg.length+'&id='+req.user.id+'&email='+req.user._json.email+'&gender='+req.user.gender+'&age='+req.user._json.age_range.min)
 
 })})
 
@@ -120,12 +120,12 @@ console.log(fb_age)
 console.log(fb_email)
 if(gglength>0){
     req.session.username = fb_id;   
-    res.redirect('http://127.0.0.1:3005/homepage')     
+    res.redirect('http://140.127.218.203:3005/homepage')     
 }else{
     var sql2 = 'insert INTO user (u_fb,u_email,u_age,u_gender) values ("'+fb_id+'","'+fb_email+'","'+fb_age+'","'+fb_gender+'")'
     con.query(sql2,function(error){if(error){console.log('寫入資料失敗！');throw error;}})
     req.session.username = fb_id;
-    res.redirect('http://127.0.0.1:3005/homepage')
+    res.redirect('http://140.127.218.203:3005/homepage')
 }
 
 })
@@ -134,8 +134,6 @@ if(gglength>0){
 
 app.get('/homepage', function (req, res) {      //首頁
     var user=new Array();
-    res.cookie('history1',31)
-    res.cookie('history2',32)
     if(req.session.userid){
         var session_userid=req.session.userid
     }else{
@@ -263,7 +261,7 @@ app.get('/user_edit', function (req, res) {     //資料更新
         console.log(req.session.userid)
     
     }else{
-        res.redirect('http://127.0.0.1:3005/login')
+        res.redirect('http://140.127.218.203:3005/login')
     }
 
 
@@ -285,7 +283,7 @@ app.get('/user_edit', function (req, res) {     //資料更新
     });
 
 
-    res.redirect('http://127.0.0.1:3005/user_edit')
+    res.redirect('http://140.127.218.203:3005/user_edit')
  })
  app.get('/votepage', function (req, res) {     //投票頁
     var user=new Array();
@@ -492,12 +490,12 @@ app.get('/user_edit', function (req, res) {     //資料更新
                     throw error;
                 } 
             });
-            res.redirect('http://127.0.0.1:3005/votepage?no='+v_code)
+            res.redirect('http://140.127.218.203:3005/votepage?no='+v_code)
         }else{
-            res.redirect('http://127.0.0.1:3005/login')
+            res.redirect('http://140.127.218.203:3005/login')
         }
     }else{
-        res.redirect('http://127.0.0.1:3005/votepage?no='+v_code)
+        res.redirect('http://140.127.218.203:3005/votepage?no='+v_code)
     }
  })
  app.post('/comment', function (req, res) {       //留言
@@ -515,9 +513,9 @@ app.get('/user_edit', function (req, res) {     //資料更新
             }
         });
 
-        res.redirect('http://127.0.0.1:3005/votepage?no='+v_code)
+        res.redirect('http://140.127.218.203:3005/votepage?no='+v_code)
     }else{
-        res.redirect('http://127.0.0.1:3005/login')
+        res.redirect('http://140.127.218.203:3005/login')
     }
    
 
@@ -545,10 +543,10 @@ app.get('/user_edit', function (req, res) {     //資料更新
             req.session.userid = result[0].u_id;
         // console.log(req.session.userid);
         // res.send("req.session.userid")
-            res.redirect('http://127.0.0.1:3005/homepage')
+            res.redirect('http://140.127.218.203:3005/homepage')
         // res.render('votepage',{ name: result[0].name ,endtime:result[0].endtime ,Option1:result[0].Option1 ,Option2:result[0].Option2})
         }else{
-            res.redirect('http://127.0.0.1:3005/login')
+            res.redirect('http://140.127.218.203:3005/login')
         }
     });
  })
@@ -566,7 +564,7 @@ app.get('/user_edit', function (req, res) {     //資料更新
         if(error){console.log('讀取失敗！');throw error;}
         ff=result
         console.log(ff.length+"ssads")
-        res.redirect('http://127.0.0.1:3005/aabbccdd/lmkmnkj/iujiu/ji?length='+ff.length)
+        res.redirect('http://140.127.218.203:3005/aabbccdd/lmkmnkj/iujiu/ji?length='+ff.length)
     })
     console.log(ff.length)
 
@@ -580,7 +578,7 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
         
         // res.send("asas")
         //req.session.userid= result[0].u_id;
-        res.redirect('http://127.0.0.1:3005/login')
+        res.redirect('http://140.127.218.203:3005/login')
     }
     });
 })
@@ -602,7 +600,7 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
         });
         
     }else{
-        res.redirect('http://127.0.0.1:3005/login')
+        res.redirect('http://140.127.218.203:3005/login')
     }
  })
 
@@ -627,9 +625,9 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
         var add='INSERT INTO vote (name,endtime,votelimit,Option1,Option2,Option3,Option4,Option5,Option6,Option7,Option8,Option9,Option10) values ("'+name+'","'+endtime+'","'+votelimit+'","'+Option1+'","'+Option2+'","'+Option3+'","'+Option4+'","'+Option5+'","'+Option6+'","'+Option7+'","'+Option8+'","'+Option9+'","'+Option10+'" )'
         con.query(add,function(error){if(error){console.log('寫入資料失敗！');throw error;}});
 
-        res.redirect('http://127.0.0.1:3005/build/voting_results/new/input')
+        res.redirect('http://140.127.218.203:3005/build/voting_results/new/input')
     }else{
-        res.redirect('http://127.0.0.1:3005/build')
+        res.redirect('http://140.127.218.203:3005/build')
     }
    
  })
@@ -648,7 +646,7 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
     setTimeout(function(){
         var add = ' INSERT INTO voting_results(v_id,u_id) value ("'+newno+'","0") '
         con.query(add,function(error){if(error){console.log('寫入資料失敗！');throw error;}console.log(newno);});
-        res.redirect('http://127.0.0.1:3005/homepage')
+        res.redirect('http://140.127.218.203:3005/homepage')
     },500);
  })
 
@@ -770,7 +768,7 @@ app.get('/pie', function (req, res) {
  })
  app.get('/logout', function (req, res) {
     req.session = null
-    res.redirect('http://127.0.0.1:3005/login')
+    res.redirect('http://140.127.218.203:3005/login')
  })
 
  app.listen(3005)

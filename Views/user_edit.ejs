@@ -11,13 +11,13 @@
 </head>
 <body>
 	<div class="header">
-		<a href="http://localhost:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
-		<div id="right_login_btn"><a href="http://localhost:3005/user_edit" id="username"><%= file[0].u_account %></a><a href="http://localhost:3005/logout" id="log_state">登出</a></div>
+		<a href="http://140.127.218.203:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
+		<div id="right_login_btn"><a href="http://140.127.218.203:3005/user_edit" id="username"><%= file[0].u_account %></a><a href="http://140.127.218.203:3005/logout" id="log_state">登出</a></div>
 	</div>
 	<div class="wrapper">
 		<h2 class="user_edit">個人資料編輯</h2>
 		<div class="editblock">
-			<form action="http://localhost:3005/user_edit"  method='post'>
+			<form action="http://140.127.218.203:3005/user_edit"  method='post'>
 				<input type="hidden" name="u_id" value=<%= file[0].u_id %>>
 				<div class="account">帳號 <input type="text" name="account" value=<%= file[0].u_account %> ><img src="http://simpleicon.com/dev/wp-content/uploads/pencil.png" alt="" class="pencil_icon"></div>
 				<div class="password">密碼 <input type="password" name="pwd" value=<%= file[0].u_pwd %> ><img src="http://simpleicon.com/dev/wp-content/uploads/pencil.png" alt="" class="pencil_icon"></div>
