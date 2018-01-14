@@ -73,8 +73,14 @@ function deltxt(id) {
       k++;
     }
   }
-
-  
 }
+
+//後臺隱藏
+$(function(){
+  $('#fff').hide();
+  $('.watchbackstage').on('click', function(){
+    $('#fff').slideToggle();
+  });
+});
 
 

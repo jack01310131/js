@@ -1,4 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
+﻿/* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -81,17 +81,25 @@ img{
     left: 0;
     z-index: 9999;
     background: #141414;
+    opacity: 0.9;
 }
 
 .cover img{
+	width: 25%;
 	margin: 0 auto;
     display: block;
+    margin-top: 20px;
+}
+
+.header-login{
+	width: 100%;
 }
 
 #title{
 	padding-top: 50px;
-    padding-bottom: 30px;
+    padding-bottom: 3%;
     text-align: center;
+    animation-delay: 1.5s;
     animation-duration: 2s;
 }	
 
@@ -122,8 +130,9 @@ img{
     position: absolute;
     bottom: 0;
     background: #141414d4;
+    animation-delay: 1.5s;
     animation-duration: 2s;
-    padding: 2.5% 0;
+    padding: 35px 0;
 }
 
 #copyright p{
@@ -140,7 +149,7 @@ img{
 
 #sign-in-btn{
 	display: block;
-	animation-delay: 0.25s;
+	animation-delay: 1.5s;
     animation-duration: 1.5s;
     transition: background 0.5s;
 }
@@ -171,7 +180,7 @@ img{
 
 #sign-up-btn{
 	display: block;
-	animation-delay: 0.25s;
+	animation-delay: 1.5s;
     animation-duration: 1.5s;
     transition: background 0.5s;
 }
@@ -591,4 +600,136 @@ img{
 	color: #29487d;
 	border: 1px solid #29487d;
 	border-radius: 6px;
+}
+
+/* ↓　RWD ↓　*/
+
+@media screen and (max-width: 940px) {
+	
+	.wrap-login{
+		background: url("../img/bg.jpg") center center fixed no-repeat;;    
+	    background-size: cover;    
+	}
+
+	.vote-data{
+		text-align: center;
+		width: 30%;
+		height: auto;
+		margin: 1%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	
+	.wrap-login{
+		background: url("../img/bg.jpg") center center fixed no-repeat;;    
+	    background-size: cover;    
+	}
+	
+	#sign-in-btn{
+		margin-bottom: 10px;
+	}
+
+	#sign-up-btn{
+		margin-top: 10px;
+	}
+
+	#sign-in-btn a{
+		width: 50%;
+		line-height: 100px;
+		letter-spacing: 5px;
+		font-size: 200%;
+		float: none;
+	}
+
+	#sign-up-btn a{
+		width: 50%;
+		line-height: 100px;
+		letter-spacing: 5px;
+		font-size: 200%;
+		float: none;
+	}
+
+	.vote-data{
+		text-align: center;
+		width: 47%;
+		height: auto;
+		margin: 1%;
+	}
+
+	#title h1{
+		font-size: 350%;
+	}
+
+}
+
+@media screen and (max-width: 375px) {
+
+	.wrap-login{
+		background: url("../img/bg.jpg") center center fixed no-repeat;;    
+	    background-size: cover;    
+	}
+
+	.vote-data{
+		width: 80%;
+		height: auto;
+		float: none;
+	}
+
+	.header-login{
+		width: 80%;
+	}
+
+}
+
+@media screen and (max-width: 640px) {
+  #right_login_btn{
+    position: relative;
+    /*right: 10px;*/
+    left: 10%;
+    font-size: 150%;
+    color: #0c9;
+      /* top:-90px; */
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  #right_login_btn{
+    position: relative;
+    /*right: 10px;*/
+    left: 60%;
+    font-size: 150%;
+    color: #0c9;
+      top:-30px;
+  }
+
+}
+@media screen and (max-width: 595px) {
+  #right_login_btn{
+    position: relative;
+    /*right: 10px;*/
+    /* right:30%; */
+    left:5px;
+    top: 70px;
+    font-size: 150%;
+    color: #0c9;
+      /* top:-50px; */
+  }
+
+}
+
+@media screen and (max-width: 380px) {
+  #right_login_btn{
+    position: relative;
+    left: 205px;
+    top:-30px;
+    font-size: 150%;
+    color: #0c9;
+
+      width:300px;
+      height: 50px;
+      /* background-color: black */
+  }
+
 }

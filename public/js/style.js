@@ -63,3 +63,18 @@ function deltxt(id) {
   $("#p"+id).remove();
   optionId--;
 }
+//後臺隱藏
+$(function(){
+  $('#fff').hide();
+  $('.watchbackstage').on('click', function(){
+    $('#fff').slideToggle();
+  });
+});
+
+//載入
+
+jQuery(document).ready(function() {
+  setTimeout(function() {
+    $(".cover").fadeToggle('slow');
+  },500);
+});

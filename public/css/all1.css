@@ -176,6 +176,7 @@ body{
   margin-left: 10;
 }
 
+
 /*.vote_choice input[type=magic]{
   width: 50px;
 }
@@ -549,15 +550,7 @@ body{
   margin: 0 auto;
 }
 
-.gender_analysis img{
-  width: 400px;
-  float: left;
-}
 
-.age_analysis img{
-  width: 400px;
-  float: left;
-}
 
 .header{
   width: 100%;
@@ -651,4 +644,153 @@ a{
   margin-left: 5px;
   float: left;
   color: #0c9
+}
+
+.choice_color1{
+  background:rgba(31, 119, 180,0.7);
+}
+.choice_color2{
+  background:rgba(255, 127, 14,0.7);
+}
+.choice_color3{
+  background-color: rgba(44, 160, 44,0.7);
+}
+.choice_color4{
+  background-color: rgba(214, 39, 40,0.7);
+}
+.choice_color5{
+  background-color: rgba(148, 103, 189,0.7);
+}
+.choice_color6{
+  background-color: rgba(140, 86, 75,0.7);
+}
+.choice_color7{
+  background-color: rgba(227, 119, 194,0.7);
+}
+.choice_color8{
+  background-color: rgba(127, 127, 127,0.7);
+}
+.choice_color9{
+  background-color: rgba(188, 189, 34,0.7);
+}
+.choice_color10{
+  background-color: rgba(23, 190, 207,0.7);
+}
+
+.choice1{
+  width: 10px;
+  height: 10px;
+  background:rgba(31, 119, 180,0.7);
+}
+.choice2{
+  width: 10px;
+  height: 10px;
+  background:rgba(255, 127, 14,0.7);
+}
+.choice3{
+  width: 10px;
+  height: 10px;
+  background-color: rgba(44, 160, 44,0.7);
+}
+.choice4{
+  width: 10px;
+  height: 10px;
+  background-color: rgba(214, 39, 40,0.7);
+}
+.choice5{
+  width: 10px;
+  height: 10px;
+  background-color: rgba(148, 103, 189,0.7);
+}
+.choice6{
+  width: 10px;
+  height: 10px;
+  background-color: rgba(140, 86, 75,0.7);
+}
+.choice7{
+  width: 10px;
+  height: 10px;
+  background-color: rgba(227, 119, 194,0.7);
+}
+.choice8{
+  width: 10px;
+  height: 10px;
+  background-color: rgba(127, 127, 127,0.7);
+}
+.choice9{
+  width: 10px;
+  height: 10px;
+  background-color: rgba(188, 189, 34,0.7);
+}
+.choice10{
+  width: 10px;
+  height: 10px;
+  background-color: rgba(23, 190, 207,0.7);
+}
+
+.backstage_choice_content{
+  background-color: #eeeeee;
+  padding: 5px;
+  width: 800px;
+  border-radius: 5px;
+  margin-right: 20px;
+  
+}
+
+.backstage_vote_choice h3{
+  font-size:30px;
+  text-align: center
+}
+
+.backstage_vote_choice{
+  width: 800px;
+  height: auto;
+  margin-top: 30px;
+  line-height: 25px;
+}
+
+.backstage_vote_choice li p{
+  /*background-color: #cccccc;*/
+  /*width: 300px;*/
+  /*margin-top: 5px;*/
+  margin-left: 10;
+}
+
+
+.vote_option_analysis h3{
+  font-size: 30px;
+}
+
+.gender_analysis{
+  width: 400px;
+  float: left;
+}
+
+.age_analysis {
+  width: 400px;
+  float: left;
+}
+
+
+.gender_analysis img{
+  width: 400px;
+  float: left;
+}
+
+.age_analysis img{
+  width: 400px;
+  float: left;
+}
+
+.piechart_analysis{
+  margin-top: 50px;
+}
+
+.age_analysis p,div{
+  display: inline-block
+}
+
+
+.gender_analysis p,div{
+  display: inline-block
 }

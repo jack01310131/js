@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>投票頁</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	
 	<link rel="stylesheet" href="all1.css">	
 	<link rel="Shortcut Icon" type="image/x-icon" href="icon.png" />
 	<script src="https://d3js.org/d3.v4.0.0-alpha.4.min.js"></script>
@@ -27,13 +29,14 @@
 
 </head>
 <body>
+
 	<div class="header">
 		<% if(userid > 0) { %>
-			<a href="http://140.127.218.203:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
-			<div id="right_login_btn"><a href="http://140.127.218.203:3005/user_edit" id="username"><%= user[0].u_account %></a><a href="http://140.127.218.203:3005/logout" id="log_state">登出</a></div>
+			<a href="http://localhost:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
+			<div id="right_login_btn"><a href="http://localhost:3005/user_edit" id="username"><%= user[0].u_account %></a><a href="http://localhost:3005/logout" id="log_state">登出</a></div>
 		<% }else{ %>
-			<a href="http://140.127.218.203:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
-			<div id="right_login_btn"><a href="http://140.127.218.203:3005/login" id="log_state">登錄</a></div>
+			<a href="http://localhost:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
+			<div id="right_login_btn"><a href="http://localhost:3005/login" id="log_state">登錄</a></div>
 		<% } %>
 	</div>
 	<div class="clear"></div>
@@ -44,7 +47,7 @@
 		<div class="vote_content">
 			<div class="left_content">
 				<div class="vote_choice">
-				<form action="http://140.127.218.203:3005/sendvote" method='post'>
+				<form action="http://localhost:3005/sendvote" method='post'>
 					<input type="hidden" name="v_code" value=<%= file[0].v_no%> >
 					<h3>投票選項</h3>
 						<ul>
@@ -98,7 +101,7 @@
 						if(file.length>0){
 							for(var i=0;i<file.length;i++){
 					%>					
-							<li><div class="comments"><p><%= i+1 %>樓 <%= file[i].u_account%></p><%= file[i].message%></div></li>
+							<li><div class="comments"><p><%= i+1 %>樓 <%= file[i].u_account%>  <%=file[i].settime %></p><%= file[i].message%></div></li>
 					<%		}
 						}
 					 %>
@@ -106,7 +109,7 @@
 			</div>
 			<div class="vote_leavemessage">
 				<h3>我要留言</h3><br>
-				<form action="http://140.127.218.203:3005/comment"  method='post'>
+				<form action="http://localhost:3005/comment"  method='post'>
 					<input type="hidden" name="v_code" value=<%= file[0].v_no%> >
 					<input type="text" name="message" placeholder="我有話要說...">
 					<input type="submit" class="send_message" value="送出">
@@ -139,17 +142,17 @@
 		context.translate(width / 2, height / 2);
 	
 		context.globalAlpha = 0.7;
-		arcs.forEach(function(d, i) {
+	arcs.forEach(function(d, i) {
 			context.beginPath();
 			arc(d);
 			context.fillStyle = colors[i];
 			context.fill();
-		});
+	});
 	
-		context.globalAlpha = 1;
-		context.beginPath();
-		arcs.forEach(arc);
+	context.globalAlpha = 1;
+	context.beginPath();
+	arcs.forEach(arc);
 		
 	
-	</script>
+</script>
 </html>
