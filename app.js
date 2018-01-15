@@ -38,10 +38,11 @@ app.set('views', path.join(__dirname, 'Views'));
 app.set('view engine', 'ejs');
 
 var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "presonafrenim108",
-    database: "jsproject"
+    host: "db4free.net",
+    user: "jsim108project",
+    password: "im108js",
+    port:"3307",
+    database: "jsimproject"
   });
   con.connect(function(err) {
     if (err) {
@@ -131,6 +132,16 @@ if(gglength>0){
 })
 
 
+app.get('/backstage_login_check',function(req,res){
+
+    var check_account = req.query.manager_account , check_pwd = req.query.manager_pwd
+    if(check_account=='root' && check_pwd=='root'){
+        
+        res.redirect('http://140.127.218.203:3005/backstage_option')
+    }else{
+	res.redirect('http://140.127.218.203:3005/backstage_login')
+    }
+})
 
 app.get('/homepage', function (req, res) {      //首頁
     var user=new Array();
@@ -564,12 +575,17 @@ app.get('/user_edit', function (req, res) {     //資料更新
         if(error){console.log('讀取失敗！');throw error;}
         ff=result
         console.log(ff.length+"ssads")
-        res.redirect('http://140.127.218.203:3005/aabbccdd/lmkmnkj/iujiu/ji?length='+ff.length)
+        res.redirect('http://140.127.218.203:3005/aabbccdd/lmkmnkj/iujiu/ji?length='+ff.length+'&account='+account2+'&pwd='+pwd2+'&email='+email2+'&age='+age2+'&gender='+gender2)
     })
     console.log(ff.length)
-
+})
 app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到資料庫
     var length =req.query.length
+    var account2= req.query.account;
+    var pwd2 =req.query.pwd
+    var email2 =req.query.email
+    var age2 =req.query.age
+    var gender2 =req.query.gender
     if(length>0){
         res.send('wrong')
     }else{
@@ -581,7 +597,6 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
         res.redirect('http://140.127.218.203:3005/login')
     }
     });
-})
 
  app.get('/build', function (req, res) {    //建立投票
     if(req.session.userid) {
@@ -681,6 +696,7 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
     res.render('backstage_login')
 
  })
+
 
  app.get('/backstage_analysis', function (req, res) {
     
