@@ -12,6 +12,8 @@ var dateFormat = require('dateformat');
 var passport = require('passport')
 var FacebookStrategy = require('passport-facebook').Strategy
 
+
+process.env.TZ = 'Hongkong'
 var now = new Date();
 
 app.use(cookieParser());
@@ -65,7 +67,7 @@ FACEBOOK_APP_SECRET = 'a774fce4757012d71fbb1a7d789076e7'
 passport.use(new FacebookStrategy({
 clientID: FACEBOOK_APP_ID,
 clientSecret: FACEBOOK_APP_SECRET,
-callbackURL: "http://140.127.218.203:3005/auth/facebook/callback",
+callbackURL: "http://im108jsfinalproject.herokuapp.com/auth/facebook/callback",
 profileFields:['id','emails','gender','birthday','age_range']
 },
 function(accessToken, refreshToken, profile, cb) {
@@ -106,7 +108,7 @@ var gg=new Array();
 con.query(sql,function(error, result, fields){
    if(error){console.log('讀取失敗！');throw error;}
    gg=result;
-   res.redirect('http://140.127.218.203:3005/fb/fbfb/fbfbfb/fbfbfbfb?gglength='+gg.length+'&id='+req.user.id+'&email='+req.user._json.email+'&gender='+req.user.gender+'&age='+req.user._json.age_range.min)
+   res.redirect('http://im108jsfinalproject.herokuapp.com/fb/fbfb/fbfbfb/fbfbfbfb?gglength='+gg.length+'&id='+req.user.id+'&email='+req.user._json.email+'&gender='+req.user.gender+'&age='+req.user._json.age_range.min)
 
 })})
 
@@ -121,12 +123,12 @@ console.log(fb_age)
 console.log(fb_email)
 if(gglength>0){
     req.session.username = fb_id;   
-    res.redirect('http://140.127.218.203:3005/homepage')     
+    res.redirect('http://im108jsfinalproject.herokuapp.com/homepage')     
 }else{
     var sql2 = 'insert INTO user (u_fb,u_email,u_age,u_gender) values ("'+fb_id+'","'+fb_email+'","'+fb_age+'","'+fb_gender+'")'
     con.query(sql2,function(error){if(error){console.log('寫入資料失敗！');throw error;}})
     req.session.username = fb_id;
-    res.redirect('http://140.127.218.203:3005/homepage')
+    res.redirect('http://im108jsfinalproject.herokuapp.com/homepage')
 }
 
 })
@@ -137,9 +139,9 @@ app.get('/backstage_login_check',function(req,res){
     var check_account = req.query.manager_account , check_pwd = req.query.manager_pwd
     if(check_account=='root' && check_pwd=='root'){
         
-        res.redirect('http://140.127.218.203:3005/backstage_option')
+        res.redirect('http://im108jsfinalproject.herokuapp.com/backstage_option')
     }else{
-	res.redirect('http://140.127.218.203:3005/backstage_login')
+	res.redirect('http://im108jsfinalproject.herokuapp.com/backstage_login')
     }
 })
 
@@ -272,7 +274,7 @@ app.get('/user_edit', function (req, res) {     //資料更新
         console.log(req.session.userid)
     
     }else{
-        res.redirect('http://140.127.218.203:3005/login')
+        res.redirect('http://im108jsfinalproject.herokuapp.com/login')
     }
 
 
@@ -292,10 +294,9 @@ app.get('/user_edit', function (req, res) {     //資料更新
             throw error;
         }
     });
-
-
-    res.redirect('http://140.127.218.203:3005/user_edit')
+    res.redirect('http://im108jsfinalproject.herokuapp.com/user_edit')
  })
+
  app.get('/votepage', function (req, res) {     //投票頁
     var user=new Array();
     if(req.session.userid){
@@ -303,6 +304,7 @@ app.get('/user_edit', function (req, res) {     //資料更新
     }else{
         var session_userid=0
     }
+
     var select4=' SELECT u_account FROM user WHERE u_id = "'+req.session.userid+'"'
     con.query(select4,function(error, result, fields){
         if(error){
@@ -311,24 +313,26 @@ app.get('/user_edit', function (req, res) {     //資料更新
         }
         user = result
     });
-
+    var votestatus="no"
     var no=req.query.no
     var select='select * from user,vote,message where v_no="'+no+'" and vote.v_no=message.v_id and message.u_id=user.u_id '
     var select2='select * from vote where v_no="'+no+'" '
-
     var select3='select SUM(vote_option1+vote_option2+vote_option3+vote_option4+vote_option5+vote_option6+vote_option7+vote_option8+vote_option9+vote_option10) as totalvote, sum(vote_option1) as SUMoption1, sum(vote_option2) as SUMoption2, sum(vote_option3) as SUMoption3, sum(vote_option4) as SUMoption4, sum(vote_option5) as SUMoption5, sum(vote_option6) as SUMoption6, sum(vote_option7) as SUMoption7, sum(vote_option8) as SUMoption8, sum(vote_option9) as SUMoption9, sum(vote_option10) as SUMoption10 from vote,voting_results where v_no="'+no+'" and voting_results.v_id=vote.v_no'
     var vote_option=new Array(10);
     var totalvote=0;
-    // con.query(select,function(error, result, fields){
-    //     if(error){
-    //         console.log('資料讀取失敗！');
-    //         throw error;
-    //     }
-    //     if(result.length>0){
+    var select5='select v_id from voting_results where v_id="'+no+'" and u_id="'+session_userid+'" and u_id not in ("0") '
+    con.query(select5,function(error, result, fields){
+        if(error){
+            console.log('資料讀取失敗！');
+            throw error;
+        }
             
-    //     }else{
-    //     }
-    // });
+        if(result.length>0){
+            votestatus="yes"
+        }else{
+
+        }
+    });
 
     con.query(select3,function(error, result, fields){
         if(error){
@@ -363,7 +367,7 @@ app.get('/user_edit', function (req, res) {     //資料更新
         
         if(result.length>0){
             console.log(result[0].endtime.toLocaleString())
-            res.render('votepage',{file: result, vote_option: vote_option, totalvote: totalvote, userid: session_userid, user: user, end: result[0].endtime.toLocaleString()})
+            res.render('votepage',{file: result, vote_option: vote_option, totalvote: totalvote, userid: session_userid, user: user, end: result[0].endtime.toLocaleString(),votestatus: votestatus})
         }else{
         }
     });
@@ -375,7 +379,7 @@ app.get('/user_edit', function (req, res) {     //資料更新
         console.log(result);
         console.log(result.length);
         if(result.length>0){
-            res.render('votepage2',{file: result, vote_option: vote_option , totalvote: totalvote, userid: session_userid, user: user, end: result[0].endtime.toLocaleString()})
+            res.render('votepage2',{file: result, vote_option: vote_option , totalvote: totalvote, userid: session_userid, user: user, end: result[0].endtime.toLocaleString(),votestatus: votestatus})
         }
     });
     
@@ -501,12 +505,12 @@ app.get('/user_edit', function (req, res) {     //資料更新
                     throw error;
                 } 
             });
-            res.redirect('http://140.127.218.203:3005/votepage?no='+v_code)
+            res.redirect('http://im108jsfinalproject.herokuapp.com/votepage?no='+v_code)
         }else{
-            res.redirect('http://140.127.218.203:3005/login')
+            res.redirect('http://im108jsfinalproject.herokuapp.com/login')
         }
     }else{
-        res.redirect('http://140.127.218.203:3005/votepage?no='+v_code)
+        res.redirect('http://im108jsfinalproject.herokuapp.com/votepage?no='+v_code)
     }
  })
  app.post('/comment', function (req, res) {       //留言
@@ -514,8 +518,11 @@ app.get('/user_edit', function (req, res) {     //資料更新
     if(req.session.userid) {
         var v_code=req.body.v_code;
         var u_message=req.body.message;
-        var nowtime = dateFormat(now, "yyyy-mm-dd hh:MM:ss");
-        
+        var nowtime = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
+        nowtime.toLocaleString();
+        console.log("nowtime"+nowtime)
+        console.log("now"+now)
+        console.log("now2"+now.toLocaleString())
         var add='INSERT INTO message (u_id,v_id,message,settime) values ("'+req.session.userid+'","'+v_code+'","'+u_message+'","'+nowtime+'" )'
         con.query(add,function(error){
             if(error){
@@ -524,9 +531,9 @@ app.get('/user_edit', function (req, res) {     //資料更新
             }
         });
 
-        res.redirect('http://140.127.218.203:3005/votepage?no='+v_code)
+        res.redirect('http://im108jsfinalproject.herokuapp.com/votepage?no='+v_code)
     }else{
-        res.redirect('http://140.127.218.203:3005/login')
+        res.redirect('http://im108jsfinalproject.herokuapp.com/login')
     }
    
 
@@ -554,10 +561,10 @@ app.get('/user_edit', function (req, res) {     //資料更新
             req.session.userid = result[0].u_id;
         // console.log(req.session.userid);
         // res.send("req.session.userid")
-            res.redirect('http://140.127.218.203:3005/homepage')
+            res.redirect('http://im108jsfinalproject.herokuapp.com/homepage')
         // res.render('votepage',{ name: result[0].name ,endtime:result[0].endtime ,Option1:result[0].Option1 ,Option2:result[0].Option2})
         }else{
-            res.redirect('http://140.127.218.203:3005/login')
+            res.redirect('http://im108jsfinalproject.herokuapp.com/login')
         }
     });
  })
@@ -575,7 +582,7 @@ app.get('/user_edit', function (req, res) {     //資料更新
         if(error){console.log('讀取失敗！');throw error;}
         ff=result
         console.log(ff.length+"ssads")
-        res.redirect('http://140.127.218.203:3005/aabbccdd/lmkmnkj/iujiu/ji?length='+ff.length+'&account='+account2+'&pwd='+pwd2+'&email='+email2+'&age='+age2+'&gender='+gender2)
+        res.redirect('http://im108jsfinalproject.herokuapp.com/aabbccdd/lmkmnkj/iujiu/ji?length='+ff.length+'&account='+account2+'&pwd='+pwd2+'&email='+email2+'&age='+age2+'&gender='+gender2)
     })
     console.log(ff.length)
 })
@@ -594,7 +601,7 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
         
         // res.send("asas")
         //req.session.userid= result[0].u_id;
-        res.redirect('http://140.127.218.203:3005/login')
+        res.redirect('http://im108jsfinalproject.herokuapp.com/login')
     }
     });
 
@@ -615,7 +622,7 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
         });
         
     }else{
-        res.redirect('http://140.127.218.203:3005/login')
+        res.redirect('http://im108jsfinalproject.herokuapp.com/login')
     }
  })
 
@@ -640,9 +647,9 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
         var add='INSERT INTO vote (name,endtime,votelimit,Option1,Option2,Option3,Option4,Option5,Option6,Option7,Option8,Option9,Option10) values ("'+name+'","'+endtime+'","'+votelimit+'","'+Option1+'","'+Option2+'","'+Option3+'","'+Option4+'","'+Option5+'","'+Option6+'","'+Option7+'","'+Option8+'","'+Option9+'","'+Option10+'" )'
         con.query(add,function(error){if(error){console.log('寫入資料失敗！');throw error;}});
 
-        res.redirect('http://140.127.218.203:3005/build/voting_results/new/input')
+        res.redirect('http://im108jsfinalproject.herokuapp.com/build/voting_results/new/input')
     }else{
-        res.redirect('http://140.127.218.203:3005/build')
+        res.redirect('http://im108jsfinalproject.herokuapp.com/build')
     }
    
  })
@@ -661,7 +668,7 @@ app.get('/aabbccdd/lmkmnkj/iujiu/ji', function (req, res){  //把註冊轉寫到
     setTimeout(function(){
         var add = ' INSERT INTO voting_results(v_id,u_id) value ("'+newno+'","0") '
         con.query(add,function(error){if(error){console.log('寫入資料失敗！');throw error;}console.log(newno);});
-        res.redirect('http://140.127.218.203:3005/homepage')
+        res.redirect('http://im108jsfinalproject.herokuapp.com/homepage')
     },500);
  })
 
@@ -784,7 +791,7 @@ app.get('/pie', function (req, res) {
  })
  app.get('/logout', function (req, res) {
     req.session = null
-    res.redirect('http://140.127.218.203:3005/login')
+    res.redirect('http://im108jsfinalproject.herokuapp.com/login')
  })
 
- app.listen(3005)
+ app.listen(process.env.PORT || 5000)

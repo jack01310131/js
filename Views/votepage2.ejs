@@ -4,21 +4,16 @@
 	<meta charset="UTF-8">
 	<title>投票頁</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	
+	<meta property="og:title" content="八角投票網" />
+	<meta property="og:description" content="想投票嗎？來八角投票網ㄅ" />
+	<meta property="og:image" content="logo_.png" />
 	<link rel="stylesheet" href="/all1.css">	
 	<link rel="Shortcut Icon" type="image/x-icon" href="icon.png" />
 	<script src="https://d3js.org/d3.v4.0.0-alpha.4.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 	<script type="text/javascript">
-		// $(".magic_checkbox").click(function() {
-		//   	  $(".magic_checkbox").not(this).removeAttr("checked");
-		// });
-	
-		// $(".magic_checkbox").click(function(){
-		// 	var bol = $(".magic_checkbox:checked").length >=1;     
-		// 	$(".magic_checkbox").not(":checked").attr("disabled",bol);
-		// });
+
 
 		$(document).ready(function() {
 			$('input[type=checkbox]').click(function() {
@@ -38,11 +33,11 @@
 <body>
 	<div class="header">
 		<% if(userid > 0) { %>
-			<a href="http://140.127.218.203:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
-			<div id="right_login_btn"><a href="http://140.127.218.203:3005/user_edit" id="username"><%= user[0].u_account %></a><a href="http://140.127.218.203:3005/logout" id="log_state">登出</a></div>
+			<a href="http://im108jsfinalproject.herokuapp.com/homepage"><img src="pic/logo.png" title="八角投票網"></a>
+			<div id="right_login_btn"><a href="http://im108jsfinalproject.herokuapp.com/user_edit" id="username"><%= user[0].u_account %></a><a href="http://im108jsfinalproject.herokuapp.com/logout" id="log_state">登出</a></div>
 		<% }else{ %>
-			<a href="http://140.127.218.203:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
-			<div id="right_login_btn"><a href="http://140.127.218.203:3005/login" id="log_state">登錄</a></div>
+			<a href="http://im108jsfinalproject.herokuapp.com/homepage"><img src="pic/logo.png" title="八角投票網"></a>
+			<div id="right_login_btn"><a href="http://im108jsfinalproject.herokuapp.com/login" id="log_state">登錄</a></div>
 		<% } %>
 	</div>
 	<div class="clear"></div>
@@ -53,10 +48,11 @@
 		<div class="vote_content">
 			<div class="left_content">
 				<div class="vote_choice">
-				<!-- <form action="http://140.127.218.203:3005/sendvote" method='post'> -->
-				<form action="http://140.127.218.203:3005/sendvote" method='post'>
+				<!-- <form action="http://im108jsfinalproject.herokuapp.com/sendvote" method='post'> -->
+				<form action="http://im108jsfinalproject.herokuapp.com/sendvote" method='post'>
 					<input type="hidden" name="v_code" value=<%= file[0].v_no%> >
 					<h3>投票選項</h3>
+					<p>最多投 <%= file[0].votelimit%> 票</p>
 						<ul>
 							<%
 								var k;
@@ -82,8 +78,10 @@
 							<% }; %>
 						</ul>
 				</div>
-					<div class="vote_date"><p>截止時間： <%= end %></p></div>	
+					<div class="vote_date"><p>截止時間： <%= end %></p></div>
+					<% if(votestatus == 'no') {%>
 					<input type="submit" class="send_choice" value="送出">
+					<% }; %>
 				</form>
 				<div class="clear"></div>
 			</div>
@@ -102,7 +100,7 @@
 			</div>
 			<div class="vote_leavemessage">
 				<h3>我要留言</h3><br>
-				<form action="http://140.127.218.203:3005/comment"  method='post'>
+				<form action="http://im108jsfinalproject.herokuapp.com/comment"  method='post'>
 					<input type="hidden" name="v_code" value=<%= file[0].v_no%> >
 					<input type="text" name="message" placeholder="我有話要說...">
 					<input type="submit" class="send_message" value="送出">

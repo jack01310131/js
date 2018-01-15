@@ -3,6 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>編輯個人資料</title>
+	<meta property="og:title" content="八角投票網" />
+	<meta property="og:description" content="想投票嗎？來八角投票網ㄅ" />
+	<meta property="og:image" content="logo_.png" />
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	
 	<link rel="stylesheet" href="all1.css">
@@ -11,25 +14,31 @@
 </head>
 <body>
 	<div class="header">
-		<a href="http://140.127.218.203:3005/homepage"><img src="pic/logo.png" title="八角投票網"></a>
-		<div id="right_login_btn"><a href="http://140.127.218.203:3005/user_edit" id="username"><%= file[0].u_account %></a><a href="http://140.127.218.203:3005/logout" id="log_state">登出</a></div>
+		<a href="http://im108jsfinalproject.herokuapp.com/homepage"><img src="pic/logo.png" title="八角投票網"></a>
+		<div id="right_login_btn"><a href="http://im108jsfinalproject.herokuapp.com/user_edit" id="username"><%= file[0].u_account %></a><a href="http://im108jsfinalproject.herokuapp.com/logout" id="log_state">登出</a></div>
 	</div>
 	<div class="wrapper">
 		<h2 class="user_edit">個人資料編輯</h2>
 		<div class="editblock">
-			<form action="http://140.127.218.203:3005/user_edit"  method='post'>
+			<form action="http://im108jsfinalproject.herokuapp.com/user_edit"  method='post'>
 				<input type="hidden" name="u_id" value=<%= file[0].u_id %>>
 				<div class="account">帳號 <input type="text" name="account" value=<%= file[0].u_account %> ><img src="http://simpleicon.com/dev/wp-content/uploads/pencil.png" alt="" class="pencil_icon"></div>
 				<div class="password">密碼 <input type="password" name="pwd" value=<%= file[0].u_pwd %> ><img src="http://simpleicon.com/dev/wp-content/uploads/pencil.png" alt="" class="pencil_icon"></div>
 				性別 <select name="gender"  >
 						<%
-							if( file[0].u_gender == 'man'){
+							if( file[0].u_gender == 'male'){
 						%>
 		　						<option value="man" SELECTED>男</option>
 		　						<option value="woman">女</option>
-						<%	}else{  %>
+								 <option value="other">其他</option>
+						<%	}else if(file[0].u_gender == 'female'){  %>
 								 <option value="man">男</option>
 							　	<option value="woman" SELECTED>女</option>
+								 <option value="other">其他</option>
+						<%	}else{  %>
+									<option value="man">男</option>
+							   　	<option value="woman">女</option>
+									<option value="other" SELECTED>其他</option>
 						<%	}	%>
 					</select><br>
 				<div class="age" >年齡 <input type="text" name="age" value=<%= file[0].u_age %> ><img src="http://simpleicon.com/dev/wp-content/uploads/pencil.png" alt="" class="pencil_icon"></div>
