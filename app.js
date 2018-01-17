@@ -108,7 +108,11 @@ var gg=new Array();
 con.query(sql,function(error, result, fields){
    if(error){console.log('讀取失敗！');throw error;}
    gg=result;
-   res.redirect('http://im108jsfinalproject.herokuapp.com/fb/fbfb/fbfbfb/fbfbfbfb?gglength='+gg.length+'&id='+req.user.id+'&email='+req.user._json.email+'&gender='+req.user.gender+'&age='+req.user._json.age_range.min)
+   if(result.length>0){
+        res.redirect('http://im108jsfinalproject.herokuapp.com/fb/fbfb/fbfbfb/fbfbfbfb?gglength='+gg.length+'&id='+req.user.id+'&email='+req.user._json.email+'&gender='+req.user.gender+'&age='+req.user._json.age_range.min+'&u_id='+result[0].u_id)
+   }else{
+     res.redirect('http://im108jsfinalproject.herokuapp.com/fb/fbfb/fbfbfb/fbfbfbfb?gglength='+gg.length+'&id='+req.user.id+'&email='+req.user._json.email+'&gender='+req.user.gender+'&age='+req.user._json.age_range.min)
+   }
 
 })})
 
@@ -122,14 +126,31 @@ var fb_gender = req.query.gender;
 console.log(fb_age)
 console.log(fb_email)
 if(gglength>0){
-    req.session.username = fb_id;   
+    var u_id = req.query.u_id;
+    req.session.userid = u_id;   
     res.redirect('http://im108jsfinalproject.herokuapp.com/homepage')     
 }else{
-    var sql2 = 'insert INTO user (u_fb,u_email,u_age,u_gender) values ("'+fb_id+'","'+fb_email+'","'+fb_age+'","'+fb_gender+'")'
+    var sql2 = 'insert INTO user (u_fb,u_account,u_pwd,u_email,u_age,u_gender) values ("'+fb_id+'","fb_'+fb_id+'","fb","'+fb_email+'","'+fb_age+'","'+fb_gender+'")'    
+    console.log(sql2)
     con.query(sql2,function(error){if(error){console.log('寫入資料失敗！');throw error;}})
-    req.session.username = fb_id;
-    res.redirect('http://im108jsfinalproject.herokuapp.com/homepage')
+    setTimeout(function(){
+    res.redirect('http://im108jsfinalproject.herokuapp.com/fb/fbfb/fbfbfb/fbfbfbfb/setsession?fb_id='+fb_id+'&asa=')
+    ,3000})
 }
+})
+app.get('/fb/fbfb/fbfbfb/fbfbfbfb/setsession',function(req,res){
+    var fb_id = req.query.fb_id;
+    var select = ' SELECT u_id FROM user where u_fb="'+fb_id+'"'
+    console.log(select)
+    con.query(select,function(error, result, fields){
+        if(error){
+            console.log('讀取資料失敗！');
+            throw error;
+        }
+        console.log(result)
+        req.session.userid=result[0].u_id
+        res.redirect('http://im108jsfinalproject.herokuapp.com/homepage')
+    })
 
 })
 
@@ -146,11 +167,14 @@ app.get('/backstage_login_check',function(req,res){
 })
 
 app.get('/homepage', function (req, res) {      //首頁
+    console.log(req.session.userid)
     var user=new Array();
     if(req.session.userid){
         var session_userid=req.session.userid
+        console.log(req.session.userid)
     }else{
         var session_userid=0
+        console.log(req.session.userid)
     }
     var select4=' SELECT u_account FROM user WHERE u_id = "'+req.session.userid+'"'
     con.query(select4,function(error, result, fields){

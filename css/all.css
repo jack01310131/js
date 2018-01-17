@@ -583,3 +583,49 @@ img{
 	border: 1px solid #29487d;
 	border-radius: 6px;
 }
+.horizontal-line{
+	margin: 10px 0;
+	padding: 5px;
+}
+
+.line-data{
+	width: 36%; 
+	display: inline-block;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.line-text{
+	width: 10%;
+	color: #292929;
+	font-size: 120%;
+}
+
+#fb-login{
+	width: 50%;
+	margin: 10px 0;
+	padding: 5px;
+	font-size: 100%;
+	font-family: Microsoft Jhenghei;
+	font-weight: 600;
+	@include transition(all 0.30s ease-in-out);
+	outline: none;
+	background: #29487d;
+	color: #fff;
+	border: 1px solid #29487d;
+	border-radius: 6px;
+}
+
+#fb-login:hover{
+	width: 50%;
+	margin: 10px 0;
+	padding: 5px;
+	font-size: 100%;
+	font-family: Microsoft Jhenghei;
+	transition: 0.5s;
+	cursor: pointer;
+	outline: none;
+	background: #fff;
+	color: #29487d;
+	border: 1px solid #29487d;
+	border-radius: 6px;
+}
